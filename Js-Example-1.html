@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="tr-TR">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="tr">
+<meta charset="utf-8">
+<title> Js-Example-1 </title>
+<style>
+    table, th, td {
+      border: 1px solid black;
+    }
+    </style>
+
+</head>
+
+<body>
+	<form id="form" action="/" method="GET">
+        <div>
+            <label for="name">isim</label>
+            <input id="name" name="name" type="text" required>
+        </div>
+        <div>
+            <label for="surname">soyad</label>
+            <input id="surname" name="surname" type="text" required>
+        </div>
+        <div>
+            <label for="date">doğum yılınız</label>
+            <input id="date" name="date" type="date" required>
+        </div>
+        <div>
+            cinsiyet
+            <select id="mySelect">
+                <option>erkek</option>
+                <option>kadın</option>
+            </select>
+        </div>
+    </form>
+    <button onclick="click1()">yazdır</button>
+    <div>
+        <p id="article" type="text">
+            
+        </p>
+    </div>
+    <div>
+        <p id="article1" type="text">
+            
+        </p>
+    </div>
+    <div>
+        <p id="article2" type="text">
+            
+        </p>
+    </div>
+    <table id="list">
+        
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>surname</th>
+            <th>age</th>
+            <th>gender</th>
+            <th>delete</th>
+        </tr>
+        </thead>
+        <tbody id=first>
+            <tr>
+                <td>sarper</td>
+                <td>keser</td>
+                <td>20</td>
+                <td>erkek</td>
+                <td>remove</td>
+              </tr>
+              <tr>
+                <td>beril</td>
+                <td>kayalar</td>
+                <td>23</td>
+                <td>kadın</td>
+                <td>remove</td>
+              </tr>
+              <tr>
+                <td>Bartu</td>
+                <td>yunus</td>
+                <td>54</td>
+                <td>erkek</td>
+                <td>remove</td>
+              </tr>
+        </tbody>
+        <input type="search" id="gsearch" name="gsearch">
+    </table>
+
+    <script>
+        var index, table = document.getElementById('list');
+        for(var i = 1; i < table.rows.length; i++)
+            {
+                table.rows[i].cells[4].onclick = function()
+                {
+                    
+                    
+                index = this.parentElement.rowIndex;
+                table.deleteRow(index);
+                    
+                    
+                console.log(index);
+                };
+                
+            }
+        function click1(){
+            var list=document.getElementById("list");
+            var paragraph=document.getElementById("article");
+            var paragraph1=document.getElementById("article1");
+            var paragraph2=document.getElementById("article2");
+            var name =document.getElementById("name");
+            var surname =document.getElementById("surname");
+            var date =document.getElementById("date");
+            var gender =document.getElementById("mySelect");
+            var age =2021-parseInt(date.value);
+            if((name.value=="")||(surname.value=="")||(date.value=="")||(gender.value=="")){
+                alert("tüm formu doldurun.");
+            }else{
+                var name1 = name.value.replace(name.value[0],name.value[0].toUpperCase());
+                var surname1 = surname.value.replace(surname.value[0],surname.value[0].toUpperCase());
+                var gender1 = gender.value.replace(gender.value[0],gender.value[0].toUpperCase());
+                paragraph.innerHTML="Merhaba " +name1+ " "+surname1;
+                paragraph1.innerHTML=" Yaş: "+age;
+                paragraph2.innerHTML=" gender: " +gender1;
+            }
+            var name1 = name.value.replace(name.value[0],name.value[0].toUpperCase());
+            var surname1 = surname.value.replace(surname.value[0],surname.value[0].toUpperCase());
+            var gender1 = gender.value.replace(gender.value[0],gender.value[0].toUpperCase());
+            var t_name=document.createElement("td");
+            var t_surname=document.createElement("td");
+            var t_age=document.createElement("td");
+            var t_gender=document.createElement("td");
+            var t_remove=document.createElement("td");
+            t_remove.textContent="remove";
+            t_name.textContent=name1;
+            t_surname.textContent=surname1;
+            t_age.textContent=age;
+            t_gender.textContent=gender1;
+            let tbody1=document.getElementById("first");
+            let tr=document.createElement("tr");
+            tbody1.appendChild(tr);
+            tr.appendChild(t_name);
+            tr.appendChild(t_surname);
+            tr.appendChild(t_age);
+            tr.appendChild(t_gender);
+            tr.appendChild(t_remove);
+            
+        }
+
+    </script>
+    <script>
+        const searchinput=document.getElementById("gsearch");
+        const rows = document.querySelectorAll("tbody tr");
+        
+        searchinput.addEventListener("keyup",function(){
+            const q=event.target.value;
+            console.log(q);
+            rows.forEach((row)=>{
+                row.querySelector("td").textContent.toLowerCase().startsWith(q)
+                ? (row.style.display = "table-row")
+                : (row.style.display = "none");
+                console.log(row.style.display);
+            });
+        })
+    </script>
+</body>
+</html>
